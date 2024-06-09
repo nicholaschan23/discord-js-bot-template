@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Discord bot template",
   "main": "src/main.js",
+  "scripts": {
+		"start": "node bot.js"
+	},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nicholaschan23/discord-js-v14-template.git"

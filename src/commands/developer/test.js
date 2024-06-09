@@ -1,11 +1,12 @@
 const { SlashCommandBuilder } = require("discord.js");
-const log = require("../../utils/logger.js");
-const logger = new log("test");
-const hello = require("./test/hello");
+const utils = require("../../utils");
+const logger = new utils.Logger("test");
+const hello = require("./test/hello.js");
 
 module.exports = {
   category: "developer",
   data: new SlashCommandBuilder().setName("test").setDescription("Test a bot feature.").addSubcommand(hello.data),
+
   async execute(client, interaction) {
     const subcommand = interaction.options.getSubcommand();
     switch (subcommand) {

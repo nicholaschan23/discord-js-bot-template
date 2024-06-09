@@ -5,6 +5,7 @@ module.exports = {
   data: new SlashCommandSubcommandBuilder()
     .setName("hello")
     .setDescription("Hello."),
+    
   async execute(client, interaction) {
     return interaction.reply({ content: `Hello!`});
   },

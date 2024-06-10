@@ -29,8 +29,8 @@ module.exports = (client) => {
         stack.push(command);
         logger.success(`Successfully loaded ${filePathAbbrev} command`);
 
-        // Load subcommands for the command
-        loadSubcommands(path.join(commandPath, command.data.name));
+        // Load subcommand groups or subcommands for the command
+        loadSubcommandsAndGroups(path.join(commandPath, command.data.name));
       }
     });
   });
@@ -67,49 +67,48 @@ module.exports = (client) => {
   }
 
   /**
-   * Loads subcommands for a given command.
+   * Loads subcommands and subcommand groups for a given command.
    *
    * @param {string} subcommandPath - The path to the subcommands directory.
    */
-  function loadSubcommands(subcommandPath) {
+  function loadSubcommandsAndGroups(subcommandPath) {
     if (fs.existsSync(subcommandPath) && fs.statSync(subcommandPath).isDirectory()) {
       const subcommandFiles = utils.getJsFiles(subcommandPath);
 
       // Loop through each subcommand file
       subcommandFiles.forEach((file) => {
         const filePath = path.join(subcommandPath, file);
-        const command = require(filePath);
-        const filePathAbbrev = utils.abbrevCmdPath(filePath);
-
-        // Validate and log the subcommand
-        if (validateCommand(SlashCommandSubcommandBuilder, command, filePathAbbrev)) {
-          logger.success(`Successfully loaded ${filePathAbbrev} subcommand`);
-
-          // Load subcommand groups for the subcommand
-          loadSubcommandGroups(path.join(subcommandPath, command.data.name));
+        const subcommand = require(filePath);
+        if (subcommand.data instanceof SlashCommandSubcommandBuilder) {
+          const filePathAbbrev = utils.abbrevCmdPath(filePath);
+          if (validateCommand(SlashCommandSubcommandBuilder, subcommand, filePathAbbrev)) {
+            logger.success(`Successfully loaded ${filePathAbbrev} subcommand`);
+          }
+        } else if (subcommand.data instanceof SlashCommandSubcommandGroupBuilder) {
+          loadGroupSubcommands(path.join(subcommandPath, subcommand.data.name));
         }
       });
     }
   }
 
   /**
-   * Loads subcommand groups for a given subcommand.
+   * Loads subcommands for a given subcommand group.
    *
    * @param {string} subcommandGroupPath - The path to the subcommand groups directory.
    */
-  function loadSubcommandGroups(subcommandGroupPath) {
+  function loadGroupSubcommands(subcommandGroupPath) {
     if (fs.existsSync(subcommandGroupPath) && fs.statSync(subcommandGroupPath).isDirectory()) {
       const subcommandGroupFiles = utils.getJsFiles(subcommandGroupPath);
 
       // Loop through each subcommand group file
       subcommandGroupFiles.forEach((file) => {
         const filePath = path.join(subcommandGroupPath, file);
-        const command = require(filePath);
+        const subcommandGroup = require(filePath);
         const filePathAbbrev = utils.abbrevCmdPath(filePath);
 
         // Validate and log the subcommand group
-        if (validateCommand(SlashCommandSubcommandGroupBuilder, command, filePathAbbrev)) {
-          logger.success(`Successfully loaded ${filePathAbbrev} subcommand group`);
+        if (validateCommand(SlashCommandSubcommandBuilder, subcommandGroup, filePathAbbrev)) {
+          logger.success(`Successfully loaded ${filePathAbbrev} subcommand`);
         }
       });
     }

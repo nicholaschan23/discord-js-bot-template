@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const utils = require("..");
+const utils = require("../../utils")
 const logger = new utils.Logger("Interactions loader");
 
 module.exports = (client) => {

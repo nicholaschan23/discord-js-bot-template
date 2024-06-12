@@ -1,5 +1,5 @@
 const { REST, Routes } = require("discord.js");
-const config = require("../../../config.js");
+const config = require("../../config");
 const utils = require("../../utils");
 const logger = new utils.Logger("Command register");
 

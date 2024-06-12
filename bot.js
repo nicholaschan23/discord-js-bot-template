@@ -10,8 +10,17 @@ require("dotenv").config({ path: path.join(__dirname, ".env.test") });
 assert(process.env.TOKEN, "A Discord bot token for is required.");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers],
-  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+  intents: [
+    GatewayIntentBits.Guilds, 
+    GatewayIntentBits.GuildMembers, 
+    GatewayIntentBits.GuildMessages, 
+    GatewayIntentBits.MessageContent],
+  partials: [
+    Partials.Channel, 
+    Partials.GuildMember, 
+    Partials.Message, 
+    Partials.Reaction, 
+    Partials.User],
 });
 
 findEvents(client);

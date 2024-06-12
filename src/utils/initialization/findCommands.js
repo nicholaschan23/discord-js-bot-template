@@ -75,12 +75,14 @@ module.exports = (client) => {
     if (fs.existsSync(subcommandPath) && fs.statSync(subcommandPath).isDirectory()) {
       const subcommandFiles = utils.getJsFiles(subcommandPath);
 
-      // Loop through each subcommand file
+      // Loop through each subcommand and subcommand group file
       subcommandFiles.forEach((file) => {
         const filePath = path.join(subcommandPath, file);
         const subcommand = require(filePath);
         if (subcommand.data instanceof SlashCommandSubcommandBuilder) {
           const filePathAbbrev = utils.abbrevCmdPath(filePath);
+
+          // Validate and log the subcommand
           if (validateCommand(SlashCommandSubcommandBuilder, subcommand, filePathAbbrev)) {
             logger.success(`Successfully loaded ${filePathAbbrev} subcommand`);
           }
@@ -100,13 +102,13 @@ module.exports = (client) => {
     if (fs.existsSync(subcommandGroupPath) && fs.statSync(subcommandGroupPath).isDirectory()) {
       const subcommandGroupFiles = utils.getJsFiles(subcommandGroupPath);
 
-      // Loop through each subcommand group file
+      // Loop through each subcommand file of the subgroup
       subcommandGroupFiles.forEach((file) => {
         const filePath = path.join(subcommandGroupPath, file);
         const subcommandGroup = require(filePath);
         const filePathAbbrev = utils.abbrevCmdPath(filePath);
 
-        // Validate and log the subcommand group
+        // Validate and log the subcommand
         if (validateCommand(SlashCommandSubcommandBuilder, subcommandGroup, filePathAbbrev)) {
           logger.success(`Successfully loaded ${filePathAbbrev} subcommand`);
         }

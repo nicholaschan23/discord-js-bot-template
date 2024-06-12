@@ -1,5 +1,5 @@
 const { Events } = require("discord.js");
-const messages = require("../messages");
+const messages = require("../assets/messages");
 
 module.exports = {
   event: Events.InteractionCreate,
@@ -15,8 +15,6 @@ module.exports = {
         ephemeral: true,
       });
     }
-
-    // A try to execute the interaction.
 
     try {
       await command.execute(client, interaction);

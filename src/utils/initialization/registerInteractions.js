@@ -11,7 +11,7 @@ module.exports = (client) => {
 
   /**
    * Registers autocomplete interactions.
-   * Scans the specified directory for JavaScript files, requires them, and adds them to the client's autocomplete commands collection.
+   * Scans the specified directory for JavaScript files, requires them, and adds them to the client's autocomplete interactions collection.
    */
   function registerAutocompleteInteractions() {
     const autocompletePath = path.join(__dirname, "../../interactions/autocomplete");
@@ -22,7 +22,7 @@ module.exports = (client) => {
 
       for (const interactionFile of files) {
         const interaction = require(path.join(autocompletePath, module, interactionFile));
-        client.autocompleteCommands.set(interaction.name, interaction);
+        client.autocompleteInteractions.set(interaction.name, interaction);
 
         logger.success(`Successfully loaded ${interaction.name} interaction`);
       }

@@ -1,5 +1,5 @@
 const { Events } = require("discord.js");
-const messages = require("../messages")
+const messages = require("../assets/messages");
 
 module.exports = {
   event: Events.InteractionCreate,
@@ -17,7 +17,7 @@ module.exports = {
     }
 
     try {
-      await command.execute(interaction);
+      await command.execute(client, interaction);
     } catch (err) {
       console.error(err);
       return interaction.reply({

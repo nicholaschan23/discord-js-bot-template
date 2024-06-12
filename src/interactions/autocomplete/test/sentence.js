@@ -1,9 +1,9 @@
 module.exports = {
-	name: "sample",
+	name: "test",
 
 	async execute(client, interaction) {
 		const focusedValue = interaction.options.getFocused();
-		const choices = ["your", "choices"];
+		const choices = ["Hey!", "Excuse me!"];
 
 		const filtered = choices.filter((choice) =>
 			choice.startsWith(focusedValue)

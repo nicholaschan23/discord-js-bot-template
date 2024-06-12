@@ -3,4 +3,8 @@ module.exports = {
     userID: "",
     guildID: "",
   },
+
+  cooldown: {
+    default: 5
+  }
 };

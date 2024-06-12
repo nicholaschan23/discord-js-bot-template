@@ -6,6 +6,7 @@ const shout = require("./test/shout.js");
 
 module.exports = {
   category: "developer",
+  cooldown: 0,
   data: new SlashCommandBuilder().setName("test").setDescription("Test a bot feature.").addSubcommandGroup(say.data).addSubcommand(shout.data),
 
   async execute(client, interaction) {

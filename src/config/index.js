@@ -1,4 +1,4 @@
-const developer = require("./developer");
+const developer = require("./client");
 
 module.exports = {
   ...developer,

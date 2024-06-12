@@ -18,8 +18,8 @@ module.exports = {
 
     try {
       await command.execute(client, interaction);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       return interaction.reply({
         content: messages.BUTTON_ERROR,
         ephemeral: true,

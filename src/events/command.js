@@ -33,7 +33,7 @@ module.exports = {
       if (now < expirationTime) {
         const secondsLeft = Math.ceil((expirationTime - now) / 1000);
         return await interaction.reply({
-          content: `You can run that command again in \`${secondsLeft} second${secondsLeft == 1 ? "" : "s"}\`.`,
+          content: `You can run that command again in \`${secondsLeft} second${secondsLeft > 1 ? "s" : ""}\`.`,
           ephemeral: true,
         });
       }

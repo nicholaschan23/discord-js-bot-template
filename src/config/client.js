@@ -5,6 +5,8 @@ module.exports = {
   },
 
   cooldown: {
-    default: 5
-  }
+    default: 5,
+  },
+
+  logDate: true,
 };

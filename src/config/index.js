@@ -1,5 +1,5 @@
-const developer = require("./client");
+const client = require("./client");
 
 module.exports = {
-  ...developer,
+  ...client,
 };
